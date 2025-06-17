@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const DEFAULT_KEY = "default";
 const DEFAULT_CHARACTER_DATA = {
         "persona": {
@@ -136,7 +136,7 @@ export default function AdminDashboard() {
   const [newEntryName, setNewEntryName] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/client/data", {
+    fetch(`${baseUrl}/client/data`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -210,7 +210,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/client/admin/save/${selectedClientData.name}/${selectedSubject.key}/${characterKey}`,
+        `${baseUrl}/client/admin/save/${selectedClientData.name}/${selectedSubject.key}/${characterKey}`,
         {
           method: "POST",
           headers: {
@@ -303,7 +303,7 @@ export default function AdminDashboard() {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `http://localhost:5000/client/admin/delete/${selectedClientData.name}/${selectedSubject.key}/${charKey}`,
+        `${baseUrl}/client/admin/delete/${selectedClientData.name}/${selectedSubject.key}/${charKey}`,
         {
           method: "DELETE",
           headers: {
